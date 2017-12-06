@@ -1,6 +1,7 @@
 package com.carlmung.rest.book;
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.web.bind.annotation.*;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 @SpringBootApplication
 @EnableEurekaClient
 @RestController
+@EnableAutoConfiguration
 public class BookApplication {
 
 	public static void main(String[] args) {
