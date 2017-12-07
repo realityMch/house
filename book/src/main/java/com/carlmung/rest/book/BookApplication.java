@@ -16,7 +16,7 @@ public class BookApplication {
 		SpringApplication.run(BookApplication.class, args);
 	}
 
-	@RequestMapping(value = "/book", method = RequestMethod.PUT, produces = "application/json")
+	@RequestMapping(value = "/book2", method = RequestMethod.PUT, produces = "application/json")
 	public void bookPut(@RequestBody Book book) {
 		System.out.println(book.toString());
 	}

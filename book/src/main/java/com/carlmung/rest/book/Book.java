@@ -9,16 +9,16 @@ public class Book {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @GenericGenerator(name = "increment", strategy = "increment")
-    private Integer id;
+    private long id;
+
     @Column(name = "full_name")
     private String fullName;
 
-    public void setId(Integer id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public Integer getId() {
+    public long getId() {
 
         return id;
     }
