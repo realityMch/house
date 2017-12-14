@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
@@ -75,5 +76,15 @@ public class RedisCacheConfig  extends CachingConfigurerSupport {
         cacheManager.setExpires(expires);
 
         return cacheManager;
+    }
+
+    @Bean
+    public JedisConnectionFactory redisConnectionFactory() {
+        JedisConnectionFactory factory = new JedisConnectionFactory();
+        factory.setHostName(host);
+        factory.setPort(port);
+        factory.setPassword(password);
+        factory.setTimeout(timeout); //设置连接超时时间
+        return factory;
     }
 }
