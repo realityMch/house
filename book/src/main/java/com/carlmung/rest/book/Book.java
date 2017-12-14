@@ -8,8 +8,10 @@ import javax.persistence.*;
 public class Book {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private long id;
+    @GenericGenerator(name = "user-uuid", strategy = "uuid")
+    @GeneratedValue(generator = "user-uuid")
+    @Column(name = "id", nullable = false, length = 64)
+    private String id;
 
     @Column(name = "full_name")
     private String fullName;
@@ -22,12 +24,12 @@ public class Book {
 
     private String introduce;
 
-    public void setId(long id) {
-        this.id = id;
+    public String getId() {
+        return id;
     }
 
-    public long getId() {
-        return id;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public void setFullName(String fullName) {
