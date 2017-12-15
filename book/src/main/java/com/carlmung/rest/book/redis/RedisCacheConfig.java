@@ -46,15 +46,21 @@ public class RedisCacheConfig  extends CachingConfigurerSupport {
 
 
     @Bean
-    public JedisPool redisPoolFactory() {
+    public JedisConnectionFactory redisPoolFactory() {
         logger.info("JedisPool注入成功！！");
         JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
         jedisPoolConfig.setMaxIdle(maxIdle);
         jedisPoolConfig.setMaxWaitMillis(maxWaitMillis);
 
-        JedisPool jedisPool = new JedisPool(jedisPoolConfig, host, port, timeout, password);
+        JedisConnectionFactory factory = new JedisConnectionFactory();
+        factory.setHostName(host);
+        factory.setPort(port);
+        factory.setPassword(password);
+        factory.setTimeout(timeout);
+        factory.setPoolConfig(jedisPoolConfig);
+//        JedisPool jedisPool = new JedisPool(jedisPoolConfig, host, port, timeout, password);
 
-        return jedisPool;
+        return factory;
     }
 
 
@@ -78,13 +84,14 @@ public class RedisCacheConfig  extends CachingConfigurerSupport {
         return cacheManager;
     }
 
-    @Bean
-    public JedisConnectionFactory redisConnectionFactory() {
-        JedisConnectionFactory factory = new JedisConnectionFactory();
-        factory.setHostName(host);
-        factory.setPort(port);
-        factory.setPassword(password);
-        factory.setTimeout(timeout); //设置连接超时时间
-        return factory;
-    }
+//    @Bean
+//    public JedisConnectionFactory redisConnectionFactory(JedisPool jedisPool) {
+//        JedisConnectionFactory factory = new JedisConnectionFactory();
+//        factory.setPoolConfig();
+//        factory.setHostName(host);
+//        factory.setPort(port);
+//        factory.setPassword(password);
+//        factory.setTimeout(timeout); //设置连接超时时间
+//        return factory;
+//    }
 }

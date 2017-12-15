@@ -6,6 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+
 @SpringBootApplication
 @EnableEurekaClient
 @RestController
@@ -17,7 +19,8 @@ public class BookApplication {
 	}
 
 	@RequestMapping(value = "/book2", method = RequestMethod.PUT, produces = "application/json")
-	public void bookPut(@RequestBody Book book) {
+	public void bookPut(@RequestBody Book book, HttpServletRequest request) {
+		System.out.println(request.getSession().getId());
 		System.out.println(book.toString());
 	}
 
